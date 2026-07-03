@@ -1,0 +1,21 @@
+{
+    "name": "JDCode-blocks",
+    "version": "1.0.0",
+    "description": "JDCode extension for micro:bit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "jdcode.ts",
+        "deflib.ts"
+    ],
+    "icon": "⚡",
+    "card": {
+        "name": "JDCode-blocks",
+        "description": "JDCode extension for micro:bit",
+        "imageUrl": "https://github.com/junilab/jdcode/raw/main/jdcode.png",
+        "color": "blue",
+        "license": "MIT"
+  }
+}
