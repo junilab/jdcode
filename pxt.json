@@ -1,6 +1,6 @@
 {
     "name": "JDCode-blocks",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "JDCode extension for micro:bit",
     "license": "MIT",
     "dependencies": {
