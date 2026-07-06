@@ -113,6 +113,9 @@ namespace jdcode {
     //% weight=99
     export function landing(): void {
         packet.setNumber(NumberFormat.UInt16LE, 8, 0);
+        let option = packet.getNumber(NumberFormat.UInt16LE, 10);
+        option &= ~0x40;
+        packet.setNumber(NumberFormat.UInt16LE, 10, option);
     }
 
 
