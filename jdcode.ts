@@ -128,7 +128,7 @@ namespace jdcode {
         packet.setNumber(NumberFormat.UInt16LE, 8, alt);
         
         let option = packet.getNumber(NumberFormat.UInt16LE, 10);
-        option |= 0x0E;
+        option |= 0x0F;
         option &= ~0x40;
         packet.setNumber(NumberFormat.UInt16LE, 10, option);   
     }
@@ -141,7 +141,7 @@ namespace jdcode {
         vel = deflib.constrain(vel, -200, 200);
         packet.setNumber(NumberFormat.Int16LE, 8, vel);
         let option = packet.getNumber(NumberFormat.UInt16LE, 10);
-        option |= 0x4E;
+        option |= 0x4F;
         packet.setNumber(NumberFormat.UInt16LE, 10, option);
     }
 
