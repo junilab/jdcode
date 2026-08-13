@@ -117,7 +117,6 @@ namespace jdcode {
             radio.setFrequencyBand(band);
         }
         radioInit = true;
-        arming = 1;
     }
 
     //% block="이륙하기"
