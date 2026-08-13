@@ -32,6 +32,7 @@ namespace jdcode {
     let altitude = 0;
     let drone_xpos = 0;
     let drone_ypos = 0;
+    let g_rfband = -1;
 
     function checksum(start:number, buf: Buffer): number {
         let sum = 0;
@@ -46,6 +47,12 @@ namespace jdcode {
         if (checksum(6, receivedBuffer) != receivedBuffer[5]){
             return;
         }
+        
+        if (receivedBuffer[3] == 0xA4){
+            g_rfband = receivedBuffer[6];
+            return;
+        }
+        
         let option1 = receivedBuffer.getNumber(NumberFormat.UInt8LE, 7);
         let option2 = receivedBuffer.getNumber(NumberFormat.UInt8LE, 8);
 
@@ -86,18 +93,31 @@ namespace jdcode {
         }
     });
 
-    //% blockId=robodog_rf_band
-    //% block="set radio band to $band"
-    //% band.min=0 band.max=79 band.defl=7
+    //% block="라디오 밴드를 $band 로 설정"
+    //% band.defl=deflib.RadioBand.Auto
     //% group="Connection"
     //% weight=109
-    export function rfBand(band: number): void {
+    export function rfBand(band: deflib.RadioBand): void {
         if (radioInit)
             return;
-        band = deflib.constrain(band, 0, 79);
+        band = deflib.constrain(band, -1, 79);
         radio.setGroup(14)
-        radio.setFrequencyBand(band);
+        if(band == deflib.RadioBand.Auto){
+            radio.setFrequencyBand(80);
+            while(g_rfband == -1){
+                basic.pause(100);
+            }
+            radio.setFrequencyBand(g_rfband);
+            basic.showNumber(g_rfband);
+            basic.pause(1000);
+            basic.showNumber(g_rfband);
+            basic.pause(1000);
+        }
+        else{
+            radio.setFrequencyBand(band);
+        }
         radioInit = true;
+        arming = 1;
     }
 
     //% block="이륙하기"
