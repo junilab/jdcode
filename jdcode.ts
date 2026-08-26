@@ -66,8 +66,10 @@ namespace jdcode {
         drone_xpos = receivedBuffer.getNumber(NumberFormat.Int16LE, 14);
         drone_ypos = receivedBuffer.getNumber(NumberFormat.Int16LE, 16);
         
-        if (!readyState)
-            packet.setNumber(NumberFormat.UInt16LE, 10, 0x00);
+        if (!readyState){
+            for(let n=2; n<16; n++)
+                packet[n] = 0;
+        }
         watchDogCnt = 0;
     })
 
